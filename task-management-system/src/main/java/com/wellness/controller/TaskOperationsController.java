@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wellness.entity.Task;
 import com.wellness.exceptions.NoTasksPresentException;
 import com.wellness.exceptions.TaskNotFoundException;
 import com.wellness.model.TaskDto;
@@ -37,9 +36,9 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Tasks retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "No tasks found") })
 	@GetMapping("/tasks")
-	public ResponseEntity<List<Task>> getAllTasks() throws NoTasksPresentException {
+	public ResponseEntity<List<TaskDto>> getAllTasks() throws NoTasksPresentException {
 
-		return new ResponseEntity<>(taskService.getAllTaks(), HttpStatus.OK);
+		return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
 
 	}
 
@@ -48,7 +47,7 @@ public class TaskOperationsController {
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 
 	@GetMapping("/tasks/{id}")
-	public ResponseEntity<Task> getTaskById(@PathVariable Integer id) throws TaskNotFoundException {
+	public ResponseEntity<TaskDto> getTaskById(@PathVariable Integer id) throws TaskNotFoundException {
 
 		return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
 
@@ -58,7 +57,7 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Task created successfully"),
 			@ApiResponse(responseCode = "400", description = "Invalid input: Validation failed for the provided task details") })
 	@PostMapping("/tasks")
-	public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDto taskDto) {
+	public ResponseEntity<TaskDto> createTask(@Valid @RequestBody TaskDto taskDto) {
 
 		return new ResponseEntity<>(taskService.createTask(taskDto), HttpStatus.CREATED);
 
@@ -68,7 +67,7 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Task updated successfully"),
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 	@PutMapping("/tasks/{id}") // if u want to update more than one field then put
-	public ResponseEntity<Task> updateTask(@PathVariable Integer id, @Valid @RequestBody TaskDto taskDto)
+	public ResponseEntity<TaskDto> updateTask(@PathVariable Integer id, @Valid @RequestBody TaskDto taskDto)
 			throws TaskNotFoundException {
 
 		taskDto.setId(id);
@@ -93,7 +92,7 @@ public class TaskOperationsController {
 	@DeleteMapping("/tasks/{id}")
 	public ResponseEntity<Void> deleteTask(@PathVariable Integer id) throws TaskNotFoundException {
 
-		taskService.delelteTask(id);
+		taskService.deleteTask(id);
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

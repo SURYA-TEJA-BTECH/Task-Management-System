@@ -11,4 +11,7 @@ public interface TaskMapper {
 
 	@Mapping(source = "deadline", target = "dueDate")
 	Task toEntity(TaskDto taskDto);
+
+	@Mapping(source = "dueDate", target = "deadline")
+	TaskDto toTaskDto(Task task);
 }
