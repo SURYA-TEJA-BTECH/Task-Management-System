@@ -1,4 +1,4 @@
-package com.wellness.enums.handler;
+package com.wellnes.handler;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

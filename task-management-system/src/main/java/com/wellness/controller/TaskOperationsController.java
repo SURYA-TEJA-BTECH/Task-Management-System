@@ -1,7 +1,6 @@
 package com.wellness.controller;
 
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.wellness.exceptions.NoTasksPresentException;
 import com.wellness.exceptions.TaskNotFoundException;
 import com.wellness.model.TaskDto;
@@ -38,6 +36,8 @@ public class TaskOperationsController {
 	@GetMapping("/tasks")
 	public ResponseEntity<List<TaskDto>> getAllTasks() throws NoTasksPresentException {
 
+		
+		
 		return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
 
 	}
@@ -66,7 +66,7 @@ public class TaskOperationsController {
 	@Operation(summary = "Update an existing task", description = "Updates the details of an existing task.")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Task updated successfully"),
 			@ApiResponse(responseCode = "404", description = "Task not found") })
-	@PutMapping("/tasks/{id}") // if u want to update more than one field then put
+	@PutMapping("/tasks/{id}") // if u want to replace the entire object 
 	public ResponseEntity<TaskDto> updateTask(@PathVariable Integer id, @Valid @RequestBody TaskDto taskDto)
 			throws TaskNotFoundException {
 
