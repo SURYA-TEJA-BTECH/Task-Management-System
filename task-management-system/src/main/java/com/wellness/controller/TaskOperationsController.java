@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.wellness.exceptions.NoTasksPresentException;
-import com.wellness.exceptions.TaskNotFoundException;
 import com.wellness.model.TaskDto;
 import com.wellness.service.TaskService;
 
@@ -34,7 +32,7 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Tasks retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "No tasks found") })
 	@GetMapping("/tasks")
-	public ResponseEntity<List<TaskDto>> getAllTasks() throws NoTasksPresentException {
+	public ResponseEntity<List<TaskDto>> getAllTasks()  {
 
 		
 		
@@ -47,7 +45,7 @@ public class TaskOperationsController {
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 
 	@GetMapping("/tasks/{id}")
-	public ResponseEntity<TaskDto> getTaskById(@PathVariable Integer id) throws TaskNotFoundException {
+	public ResponseEntity<TaskDto> getTaskById(@PathVariable Integer id)  {
 
 		return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
 
@@ -68,7 +66,7 @@ public class TaskOperationsController {
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 	@PutMapping("/tasks/{id}") // if u want to replace the entire object 
 	public ResponseEntity<TaskDto> updateTask(@PathVariable Integer id, @Valid @RequestBody TaskDto taskDto)
-			throws TaskNotFoundException {
+			 {
 
 		taskDto.setId(id);
 
@@ -79,7 +77,7 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Task status updated successfully"),
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 	@PatchMapping("/tasks/{id}/complete") // if u want to update one field then patch mapping
-	public ResponseEntity<Void> changeStatus(@PathVariable Integer id) throws TaskNotFoundException {
+	public ResponseEntity<Void> changeStatus(@PathVariable Integer id)  {
 		System.out.println("TaskOperationsController.changeStatus()");
 		taskService.changeTaskState(id);
 
@@ -90,7 +88,7 @@ public class TaskOperationsController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Task deleted successfully"),
 			@ApiResponse(responseCode = "404", description = "Task not found") })
 	@DeleteMapping("/tasks/{id}")
-	public ResponseEntity<Void> deleteTask(@PathVariable Integer id) throws TaskNotFoundException {
+	public ResponseEntity<Void> deleteTask(@PathVariable Integer id)  {
 
 		taskService.deleteTask(id);
 

@@ -8,16 +8,16 @@ import com.wellness.model.TaskDto;
 
 public interface TaskService {
 
-	public List<TaskDto> getAllTasks() throws NoTasksPresentException;
+	public List<TaskDto> getAllTasks() ;
 
-	public TaskDto getTaskById(Integer taskid) throws TaskNotFoundException;
+	public TaskDto getTaskById(Integer taskid) ;
 
 	public TaskDto createTask(TaskDto taskDto);
 
-	public void deleteTask(Integer taskId) throws TaskNotFoundException;
+	public void deleteTask(Integer taskId) ;
 
-	public void changeTaskState(Integer taskId) throws TaskNotFoundException;
+	public void changeTaskState(Integer taskId)  ;
 
-	public TaskDto updateTask(TaskDto taskDto) throws TaskNotFoundException;
+	public TaskDto updateTask(TaskDto taskDto) ;
 
 }

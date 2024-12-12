@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
 	private TaskMapper taskMapper;
 
 	@Override
-	public List<TaskDto> getAllTasks() throws NoTasksPresentException {
+	public List<TaskDto> getAllTasks()  {
 
 		// getting all the task will be time taken if huge no tasks are available in
 		// database
@@ -45,7 +45,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 
-	public TaskDto getTaskById(Integer taskId) throws TaskNotFoundException {
+	public TaskDto getTaskById(Integer taskId)  {
 
 		Optional<Task> task = taskRepo.findById(taskId);
 		if (task.isPresent()) {
@@ -72,7 +72,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	// soft deletion
-	public void deleteTask(Integer taskId) throws TaskNotFoundException {
+	public void deleteTask(Integer taskId)  {
 
 		Task task = retrieveTaskById(taskId);
 
@@ -83,7 +83,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public void changeTaskState(Integer taskId) throws TaskNotFoundException {
+	public void changeTaskState(Integer taskId)  {
 
 		Task task = retrieveTaskById(taskId);
 
@@ -94,7 +94,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public TaskDto updateTask(TaskDto taskDto) throws TaskNotFoundException {
+	public TaskDto updateTask(TaskDto taskDto)  {
 
 		Task existingTask = retrieveTaskById(taskDto.getId());
 
@@ -112,7 +112,7 @@ public class TaskServiceImpl implements TaskService {
 
 	}
 
-	private Task retrieveTaskById(Integer taskId) throws TaskNotFoundException {
+	private Task retrieveTaskById(Integer taskId)  {
 		return taskRepo.findById(taskId)
 				.orElseThrow(() -> new TaskNotFoundException("Task not found with ID: " + taskId));
 	}

@@ -1,6 +1,6 @@
 package com.wellness.exceptions;
 
-public class NoTasksPresentException extends Exception {
+public class NoTasksPresentException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
